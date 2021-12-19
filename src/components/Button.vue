@@ -1,6 +1,11 @@
 <template>
-   <button v-on:click="msg('hello vue')" :class="{  active: isActive }">{{ text }}</button> 
+    <button 
+        v-on:click="$emit('welcome')"
+        :class="dark ? 'dark-theme' : 'light-theme'"
 
+    >
+        <slot>{{text}}</slot>
+    </button>
 </template>
 
 <script>
@@ -8,44 +13,44 @@
     name: 'Button',
 
     props: {
-      text: {
-        type: String,
-        required: true
-      },
-      height: {
-        type: Number,
-        default: 100
-      },
-      width: {
-        type: Number,
-        default: 100
-      },
+        text: {
+            type: String,
+            required: true
+        },
+        height: {
+            type: Number,
+            default: 100
+        },
+        width: {
+            type: Number,
+            default: 100
+        },
 
-      isActive: {
-        type: Boolean,
-        default: true
-      }
-    },
-
-    methods: {
-      msg: function (message) {
-        alert(message)
-      }
+        dark: {
+            type: Boolean,
+            default: false
+        }
     }
   }
 </script>
 
-<style scoped>
-  button {
-    font-size: 40px;
-    padding: 10px 50px;
-    border-radius: 20px;
-    background-color: #fff;
-    color: #000;
-  }
+<style lang="scss" scoped>
+@import '@/assets/_shared.scss';
 
-  .active {
-    background-color: #000;
-    color: #fff;
-  }
+    button {
+        font-size: 40px;
+        padding: 10px 50px;
+        border-radius: 20px;
+        margin-left: 50px;
+    }
+
+    .dark-theme {
+        background-color: $black;
+        color: $white;
+    }
+
+    .light-theme{
+        background-color: $white;
+        color: $black;
+    }
 </style>
